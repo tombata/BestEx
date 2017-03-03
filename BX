@@ -2,52 +2,27 @@
 
 Sub test()
 
-With Worksheets("Analysis")
-
-   
-Range("A1:J35").copy
-
-    
+With Worksheets("Analysis")   
+      Range("A1:J35").copy
 
    
 Windows("2017-Backtesting-Aggregation_EquityNEU.xlsm").Activate
-
-    Sheets.Add
-After:=Sheets(Sheets.Count)
-
-   
-Range("A1").PasteSpecial xlPasteAllUsingSourceTheme
-
-   
-Range("A1").PasteSpecial xlPasteColumnWidths
-
-   
-Range("A1").PasteSpecial xlPasteValuesAndNumberFormats
-
-   
-'Operation:=xlPasteSpecialOperationAdd
-
+    Sheets.Add After:=Sheets(Sheets.Count)   
+    Range("A1").PasteSpecial xlPasteAllUsingSourceTheme   
+    Range("A1").PasteSpecial xlPasteColumnWidths   
+    Range("A1").PasteSpecial xlPasteValuesAndNumberFormats
 End With
 
 End Sub
 
 Option Explicit
-
  
 
-Private Sub Workbook_NewSheet(ByVal Sh As Object)
+Private Sub Workbook_NewSheet(ByVal Sh As Object) 
 
- 
+    On Error GoTo Workbook_NewSheet_Error
 
-    On Error GoTo
-Workbook_NewSheet_Error
-
- 
-
-    Sh.Name =
-"Sheet" & Sheets.Count - 2
-
- 
+    Sh.Name = "Sheet" & Sheets.Count - 2 
 
     On Error GoTo 0
 
@@ -57,13 +32,8 @@ Workbook_NewSheet_Error
 
 Workbook_NewSheet_Error:
 
- 
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Workbook_NewSheet of VBA Document DieseArbeitsmappe"
 
-    MsgBox "Error
-" & Err.Number & " (" & Err.Description &
-") in procedure Workbook_NewSheet of VBA Document DieseArbeitsmappe"
-
- 
 
 End Sub
 
